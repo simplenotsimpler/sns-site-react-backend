@@ -13,7 +13,7 @@ const getProjects = async (req, res, next) => {
 
     const ghQueryJSON = `
     {
-      "query": "query {viewer { githubName: name githubLink: url email pinnedItems(first: 10) {repos: nodes { ... on Repository { name description url homepageUrl stargazerCount forks {totalCount} watchers { totalCount } repositoryTopics(first: 20) { nodes { topic { name } } } languages(first: 20, orderBy: {field: SIZE, direction: DESC}) { languageList:edges {language: node { name } } } } } } } }"
+      "query": "query {viewer { pinnedItems(first: 10) {repos: nodes { ... on Repository { name description url homepageUrl openGraphImageUrl stargazerCount forks {totalCount} watchers { totalCount } repositoryTopics(first: 20) { nodes { topic { name } } } languages(first: 20, orderBy: {field: SIZE, direction: DESC}) { languageList:edges {language: node { name } } } } } } } }"
     }
     `;
 
@@ -33,9 +33,6 @@ const getProjects = async (req, res, next) => {
     const {
       data: {
         viewer: {
-          githubName,
-          githubLink,
-          email,
           pinnedItems: { repos },
         },
       },
@@ -45,10 +42,7 @@ const getProjects = async (req, res, next) => {
     repos.sort((a, b) => b.stargazerCount - a.stargazerCount);
 
     res.json({
-      githubName,
-      email,
-      githubLink,
-      repos,
+      projects: repos,
     });
 
     next();
