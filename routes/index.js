@@ -5,8 +5,10 @@ router.route("/", (req, res) => {
   res.send("API is running....");
 });
 
+router.use("/basics", require("./basicsRoutes.js"));
 router.use("/projects", require("./projectsRoutes.js"));
 router.use("/skills", require("./skillsRoutes.js"));
-router.use("/basics", require("./basicsRoutes.js"));
+router.use("/work", require("./workRoutes.js"));
+router.use("/education", require("./educationRoutes.js"));
 
 module.exports = router;
