@@ -1,5 +1,5 @@
 const axios = require("axios");
-
+//TODO: combine mongodb requests into a facade
 const getBasics = async (req, res, next) => {
   try {
     const api_key = process.env.MONGO_DATA_API_KEY;
