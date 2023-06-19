@@ -33,17 +33,15 @@ const getProjects = async (req, res, next) => {
     const {
       data: {
         viewer: {
-          pinnedItems: { repos },
+          pinnedItems: { repos: projects },
         },
       },
     } = axiosResponse.data;
 
     //sort pinnedRepos by stargazerCount
-    repos.sort((a, b) => b.stargazerCount - a.stargazerCount);
+    projects.sort((a, b) => b.stargazerCount - a.stargazerCount);
 
-    res.json({
-      projects: repos,
-    });
+    res.json(projects);
 
     next();
   } catch (error) {

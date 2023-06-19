@@ -21,7 +21,7 @@ const getSkills = async (req, res, next) => {
 
     const skills = axiosResponse.data;
 
-    res.json({ skills });
+    res.json(skills);
     next();
   } catch (error) {
     next(error);

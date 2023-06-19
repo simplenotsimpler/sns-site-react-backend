@@ -21,7 +21,7 @@ const getBasics = async (req, res, next) => {
 
     const basics = axiosResponse.data;
 
-    res.json({ basics });
+    res.json(basics);
     next();
   } catch (error) {
     next(error);

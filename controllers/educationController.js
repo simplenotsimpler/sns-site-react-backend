@@ -21,7 +21,7 @@ const getEducation = async (req, res, next) => {
 
     const education = axiosResponse.data;
 
-    res.json({ education });
+    res.json(education);
     next();
   } catch (error) {
     next(error);
