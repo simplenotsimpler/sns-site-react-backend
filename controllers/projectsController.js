@@ -42,8 +42,6 @@ const getProjects = async (req, res, next) => {
     projects.sort((a, b) => b.stargazerCount - a.stargazerCount);
 
     res.json(projects);
-
-    next();
   } catch (error) {
     next(error);
   }

@@ -22,7 +22,6 @@ const getWork = async (req, res, next) => {
     const work = axiosResponse.data;
 
     res.json(work);
-    next();
   } catch (error) {
     next(error);
   }
