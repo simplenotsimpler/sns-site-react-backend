@@ -17,11 +17,23 @@ const getWork = async (req, res, next) => {
     };
 
     const axiosResponse = await axios(config);
-    console.log();
+    const currentDate = new Date().toISOString().split("T")[0];
 
     const work = axiosResponse.data;
+    //TODO: sort per previous algorithms
+    //https://github.com/simplenotsimpler/github-portfolio-simplified/blob/main/server/middlewares/fetch-work.js
+    //make a copy so don't mutate original
+    const sortedWork = work
+      .slice()
+      //sort positions by date
+      .sort((a, b) => new Date(b.endDate) - new Date(a.endDate))
+      //replace with present
+      .map((position) => ({
+        ...position,
+        ...(position.endDate === currentDate && { endDate: "Present" }),
+      }));
 
-    res.json(work);
+    res.json(sortedWork);
   } catch (error) {
     next(error);
   }
