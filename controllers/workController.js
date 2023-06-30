@@ -33,7 +33,11 @@ const getWork = async (req, res, next) => {
         ...(position.endDate === currentDate && { endDate: "Present" }),
       }));
 
-    res.json(sortedWork);
+    const filteredWork = sortedWork.filter(
+      (position) => position.showOnResume === true
+    );
+
+    res.json(filteredWork);
   } catch (error) {
     next(error);
   }
