@@ -17,11 +17,14 @@ const getEducation = async (req, res, next) => {
     };
 
     const axiosResponse = await axios(config);
-    console.log();
 
     const education = axiosResponse.data;
 
-    res.json(education);
+    const sortedEducation = education
+      .slice()
+      .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+
+    res.json(sortedEducation);
   } catch (error) {
     next(error);
   }
