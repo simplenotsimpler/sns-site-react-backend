@@ -24,7 +24,10 @@ const getEducation = async (req, res, next) => {
       .slice()
       .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
 
-    res.json(sortedEducation);
+    const filteredEducation = sortedEducation.filter(
+      (education) => education.showOnResume === true
+    );
+    res.json(filteredEducation);
   } catch (error) {
     next(error);
   }
