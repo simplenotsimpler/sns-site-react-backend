@@ -12,9 +12,9 @@ const hpp = require("hpp");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions.js");
 
-const rateLimiter = require("./middleware/rateLimiter.js");
+const loginLimiter = require("./middleware/loginLimiter.js");
 
-const { logger } = require("./middleware/logger");
+const { logger, logEvents } = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler.js");
 const PORT = process.env.PORT || 5000;
 
@@ -39,14 +39,8 @@ app.use(cors());
 */
 app.use(helmet());
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 Mins
-  max: 100,
-});
-
 if (process.env.NODE_ENV === "production") {
-  app.use(limiter);
+  app.use(loginLimiter);
 }
 
 //basics
