@@ -20,7 +20,7 @@ const getWork = async (req, res, next) => {
     const currentDate = new Date().toISOString().split("T")[0];
 
     const work = axiosResponse.data;
-    //TODO: sort per previous algorithms
+
     //https://github.com/simplenotsimpler/github-portfolio-simplified/blob/main/server/middlewares/fetch-work.js
     //make a copy so don't mutate original
     const sortedWork = work
