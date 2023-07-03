@@ -12,6 +12,8 @@ const hpp = require("hpp");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions.js");
 
+const rateLimiter = require("./middleware/rateLimiter.js");
+
 const { logger } = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler.js");
 const PORT = process.env.PORT || 5000;
