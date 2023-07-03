@@ -1,5 +1,5 @@
 const allowedOrigins = [
-  "http://localhost:3000",
+  "https://sns-site-react.onrender.com/",
   "https://www.simplenotsimpler.com",
   "https://simplenotsimpler.com",
 ];

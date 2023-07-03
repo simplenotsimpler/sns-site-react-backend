@@ -1,7 +1,11 @@
 {
   "name": "sns-site-react-backend",
   "version": "1.0.0",
-  "description": "",
+  "engines": {
+    "npm": "9.6.5",
+    "node": "18.16.0"
+  },
+  "description": "Backend proxy for React portfolio site",
   "main": "index.js",
   "scripts": {
     "start": "node index",
