@@ -3,15 +3,40 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-const rateLimit = require("express-rate-limit");
+//standard security imports
+const secure = require("ssl-express-www");
+const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
+const xss = require("xss-clean");
+const hpp = require("hpp");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions.js");
+
 const cookieParser = require("cookie-parser");
 const { logger } = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler.js");
 const PORT = process.env.PORT || 5000;
 
 app.use(logger);
+
+app.set("trust proxy", 1);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(secure);
+}
+
+// Enable cors
+// app.use(cors(corsOptions));
+app.use(cors());
+
+// Set security headers
+/* 
+  NOTE: when enable helmet get content security policy messages in Firefox. Do not get these in Chrome.
+    Content Security Policy: Couldn’t process unknown directive ‘script-src-attr’
+    Content Security Policy: The page’s settings blocked the loading of a resource at inline (“script-src”).
+    https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-attr#browser_compatibility
+*/
+app.use(helmet());
 
 // Rate limiting
 const limiter = rateLimit({
@@ -22,14 +47,17 @@ const limiter = rateLimit({
 if (process.env.NODE_ENV === "production") {
   app.use(limiter);
 }
-app.set("trust proxy", 1);
 
-// Enable cors
-app.use(cors(corsOptions));
-
+//basics
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Prevent XSS attacks
+app.use(xss());
+
+// Prevent http param pollution
+app.use(hpp());
 
 app.use("/", require("./routes/siteRootRoute.js"));
 
