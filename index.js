@@ -1,7 +1,9 @@
 require("dotenv").config();
 
 const express = require("express");
-const app = express();
+
+//compression
+const compression = require("compression");
 
 //standard security imports
 const secure = require("ssl-express-www");
@@ -16,10 +18,22 @@ const loginLimiter = require("./middleware/loginLimiter.js");
 
 const { logger, logEvents } = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler.js");
+
+//app initialization
+const app = express();
+
+//compress
+app.use(compression({ level: 8 }));
+
 const PORT = process.env.PORT || 5000;
 
 app.use(logger);
 
+// need this for environments like Heroku
+/* 
+  specifically need to set the second parameter to 1 for express-rate-limiter
+  https://stackoverflow.com/questions/62494060/express-rate-limit-not-working-when-deployed-to-heroku
+*/
 app.set("trust proxy", 1);
 
 if (process.env.NODE_ENV === "production") {
