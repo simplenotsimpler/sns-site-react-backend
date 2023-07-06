@@ -1,6 +1,6 @@
 # SNS React Site Backend
 
-Express proxy API backend for [SNS React front-end](https://github.com/simplenotsimpler/sns-site-react).
+Express proxy API backend for [SNS React front-end](https://github.com/simplenotsimpler/sns-site-react). Fetches data from GitHub and MongoDB Data API.
 
 ## Details:
 
