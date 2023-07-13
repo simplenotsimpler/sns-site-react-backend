@@ -21,7 +21,11 @@ const getSkills = async (req, res, next) => {
 
     const skills = axiosResponse.data;
 
-    res.json(skills);
+    const filteredSkills = skills.filter(
+      (skill) => skill.showOnResume === true
+    );
+
+    res.json(filteredSkills);
   } catch (error) {
     next(error);
   }
