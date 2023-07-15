@@ -33,11 +33,12 @@ const getPositions = async (req, res, next) => {
         ...(position.endDate === currentDate && { endDate: "Present" }),
       }));
 
-    const filteredPositions = sortedPositions.filter(
-      (position) => position.showOnResume === true
-    );
+    //move filter to front-end
+    // const filteredPositions = sortedPositions.filter(
+    //   (position) => position.showOnResume === true
+    // );
 
-    res.json(filteredPositions);
+    res.json(sortedPositions);
   } catch (error) {
     next(error);
   }
