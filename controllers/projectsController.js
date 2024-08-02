@@ -50,21 +50,20 @@ const getProjects = async (req, res, next) => {
 
     //brickyard dates in GitHub not accurate since the repo is a container for the site screenshot and basic info. dates are approximate
     //brickyard around time of modern-table 1.0.6 release
-    //TODO: need if statement
-    projectsWithFlatStuff.find(
+    const brickyard = projectsWithFlatStuff.find(
       (project) => project.name === "brickyard-ceramics"
-    ).createdAt = "2020-06-15";
+    );
 
-    //last modified per the headers.
-    projectsWithFlatStuff.find(
-      (project) => project.name === "brickyard-ceramics"
-    ).pushedAt = "2021-10-08";
+    if (brickyard) {
+      brickyard.createdAt = "2020-06-15";
+      brickyard.pushedAt = "2021-10-08";
+      brickyard.languages = ["HTML", "CSS"];
+    } else {
+      console.log("No Brickyard");
+    }
 
-    //manually add languages since source code not stored in GitHub
-    projectsWithFlatStuff.find(
-      (project) => project.name === "brickyard-ceramics"
-    ).languages = ["HTML", "CSS"];
     console.log("projectsWithFlatStuff", projectsWithFlatStuff);
+
     //sort pinnedRepos by stargazerCount
     // projects.sort((a, b) => b.stargazerCount - a.stargazerCount);
 
