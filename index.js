@@ -22,6 +22,9 @@ const errorHandler = require("./middleware/errorHandler.js");
 //app initialization
 const app = express();
 
+//static folder
+app.use(express.static("public"));
+
 //compress
 app.use(compression({ level: 8 }));
 
@@ -69,9 +72,9 @@ app.use(xss());
 app.use(hpp());
 
 app.use("/", require("./routes/siteRootRoute.js"));
-
 app.use("/api", require("./routes/index.js"));
 
+//TODO: fix 404, need import path, etc.
 //404 handling
 app.all("*", (req, res) => {
   res.status(404);
