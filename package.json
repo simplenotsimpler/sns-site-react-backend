@@ -2,8 +2,8 @@
   "name": "sns-site-react-backend",
   "version": "1.0.0",
   "engines": {
-    "npm": "10.8.2",
-    "node": "20.16.0"
+    "npm": ">=10.8.2",
+    "node": ">=20.16.0"
   },
   "description": "Backend proxy for React portfolio site",
   "main": "index.js",
