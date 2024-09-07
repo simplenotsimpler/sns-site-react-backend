@@ -38,7 +38,7 @@ const getProjects = async (req, res, next) => {
       },
     } = axiosResponse.data;
 
-    console.log("projects:", projects);
+    // console.log("projects:", projects);
 
     const projectsWithFlatStuff = projects.map((project) => {
       return {
@@ -62,7 +62,7 @@ const getProjects = async (req, res, next) => {
       console.log("No Brickyard");
     }
 
-    console.log("projectsWithFlatStuff", projectsWithFlatStuff);
+    // console.log("projectsWithFlatStuff", projectsWithFlatStuff);
 
     //sort pinnedRepos by stargazerCount
     // projects.sort((a, b) => b.stargazerCount - a.stargazerCount);
